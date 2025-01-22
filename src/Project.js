@@ -1,34 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function Projects() {
+  const [projects, setProjects] = useState([]);
+
+  // Fetch projects from the backend
+  useEffect(() => {
+    axios
+      .get('http://localhost:8080/api/projects')
+      .then((response) => {
+        setProjects(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching projects:', error);
+      });
+  }, []);
+
+  const getImageUrl = (projectId) => {
+    return `http://localhost:8080/api/projects/${projectId}/image`;
+  };
+
   return (
     <section className="container mt-5">
       <h1 className="text-center mb-4">My Projects</h1>
       <div className="row">
-        <div className="col-md-4">
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">Portfolio Website</h5>
-              <p className="card-text">A personal website to showcase my skills and projects.</p>
+        {projects.map((project) => (
+          <div key={project.id} className="col-md-4 mb-4">
+            <div className="card h-100">
+              {/* Fetching image as byte array and using a base64 encoded URL */}
+              <img
+                src={getImageUrl(project.id)} // Calls backend to get the image
+                alt={project.title}
+                className="card-img-top"
+                style={{ height: '200px', objectFit: 'cover' }}
+              />
+              <div className="card-body">
+                <h5 className="card-title">{project.title}</h5>
+                <p className="card-text">{project.description}</p>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="col-md-4">
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">E-Commerce App</h5>
-              <p className="card-text">An online store with product listings, shopping cart, and checkout.</p>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-4">
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">Blogging Platform</h5>
-              <p className="card-text">A platform for users to create and share blog posts.</p>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
     </section>
   );

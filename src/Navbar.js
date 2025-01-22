@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import './Navbar.css'; // Import the custom CSS for styling
+import { Link } from 'react-scroll';  // Use react-scroll for smooth scrolling
+import './Navbar.css';
 
 function Navbar() {
   return (
@@ -26,22 +26,22 @@ function Navbar() {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto d-flex flex-row">
             <li className="nav-item mx-2">
-              <Link className="nav-link" to="/">
+              <Link className="nav-link" to="home" smooth={true} duration={500}>
                 Home
               </Link>
             </li>
             <li className="nav-item mx-2">
-              <Link className="nav-link" to="About">
+              <Link className="nav-link" to="about" smooth={true} duration={500}>
                 About
               </Link>
             </li>
             <li className="nav-item mx-2">
-              <Link className="nav-link" to="/projects">
+              <Link className="nav-link" to="projects" smooth={true} duration={500}>
                 Projects
               </Link>
             </li>
             <li className="nav-item mx-2">
-              <Link className="nav-link" to="/contact">
+              <Link className="nav-link" to="contact" smooth={true} duration={500}>
                 Contact
               </Link>
             </li>
