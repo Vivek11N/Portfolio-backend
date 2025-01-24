@@ -15,7 +15,7 @@ public class Project {
 
     private String title;
     private String description;
-
+    private String details;
     @Lob // Marks the field as a large object (for storing binary data)
     private byte[] image;  // Store image as byte array
 
@@ -23,10 +23,11 @@ public class Project {
     public Project() {}
 
     // Constructor to initialize all fields
-    public Project(String title, String description, byte[] image) {
+    public Project(String title, String description, byte[] image, String details) {
         this.title = title;
         this.description = description;
         this.image = image;
+        this.details =details;
     }
 
     // Getter and Setter for id
@@ -63,5 +64,13 @@ public class Project {
 
     public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
     }
 }
